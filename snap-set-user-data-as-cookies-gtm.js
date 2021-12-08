@@ -24,12 +24,12 @@ function addListenersForFormInputFields() {
     var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
-      console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
+      // console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
       formInputField.addEventListener("focusout", function(event) {
         var eventElementId = event.target.id;
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
-        console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
       });
     }
   }
@@ -88,11 +88,11 @@ function scanAllFormButtonsAndSetCookieValues() {
     for (var ii = 0; ii < formButtonFieldIds.length; ii++) {
       if (document.querySelector("#" + formButtonFieldIds[ii] + ".activeButtonListener.active") !== null) {
         formButtonHasSelection = true;
-        console.log(formButtonObjectKeyName + ": " + formButtonFieldIds[ii]);
+        // console.log(formButtonObjectKeyName + ": " + formButtonFieldIds[ii]);
       }
     }
     if (!formButtonHasSelection) {
-      console.log(formButtonObjectKeyName + ": (none)");
+      // console.log(formButtonObjectKeyName + ": (none)");
     }
   }
 }
