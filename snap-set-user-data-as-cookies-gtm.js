@@ -1,46 +1,5 @@
 /*
- * Add listeners for form input fields
- */
-function addListenersForFormInputFields() {
-  var formInputFields = [
-    {"name": "First Name"},
-    {"id": "lastName"},
-    {"name": "Mobile Phone Number"},
-    {"id": "emailAddress"},
-    {"id": "verificationCode"},
-    {"id": "homeAddress"},
-    {"name": "Zip Code"},
-    {"id": "apartment/suite"},
-    {"id": "dateOfBirth"},
-    {"id": "driverLicenseNumber"},
-    {"id": "state"},
-    {"id": "socialSecurityNumberOrItin"},
-  ];
-  
-  for (var i = 0; i < formInputFields.length; i++) {
-    var formElementObject = formInputFields[i];
-    var elementAttributeName = Object.keys(formElementObject);
-    var elementAttributeValue = formElementObject[elementAttributeName];
-    var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
-    var formInputField = document.querySelector(elementQuerySelector);
-    if (formInputField !== null) {
-      // console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
-      formInputField.addEventListener("focusout", function(event) {
-        var eventElementId = event.target.id;
-        var eventElementName = event.target.name;
-        var eventElementValue = event.target.value;
-        // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
-        setCookie(eventElementName, eventElementValue, null);
-      });
-    }
-  }
-}
-addListenersForFormInputFields();
-
-/**********************************************/
-
-/*
- * Helper Functions
+ * Start Helper Functions
  */
 
 if (typeOf(setCookie) !== "function") { // this function might already be set in another javascript file
@@ -147,4 +106,59 @@ function addListenersToFormButtons() {
     }
   }
 }
+
+function addListenersForFormInputFields() {
+  var formInputFields = [
+    {"name": "First Name"},
+    {"id": "lastName"},
+    {"name": "Mobile Phone Number"},
+    {"id": "emailAddress"},
+    {"id": "verificationCode"},
+    {"id": "homeAddress"},
+    {"name": "Zip Code"},
+    {"id": "apartment/suite"},
+    {"id": "dateOfBirth"},
+    {"id": "driverLicenseNumber"},
+    {"id": "state"},
+    {"id": "socialSecurityNumberOrItin"},
+  ];
+  
+  for (var i = 0; i < formInputFields.length; i++) {
+    var formElementObject = formInputFields[i];
+    var elementAttributeName = Object.keys(formElementObject);
+    var elementAttributeValue = formElementObject[elementAttributeName];
+    var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
+    var formInputField = document.querySelector(elementQuerySelector);
+    if (formInputField !== null) {
+      // console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
+      formInputField.addEventListener("focusout", function(event) {
+        var eventElementId = event.target.id;
+        var eventElementName = event.target.name;
+        var eventElementValue = event.target.value;
+        // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        setCookie(eventElementName, eventElementValue, null);
+      });
+    }
+  }
+}
+
+/*
+ * End Helper Functions
+ */
+
+/**********************************************/
+
+/*
+ * Add listeners for form input fields
+ */
+
+addListenersForFormInputFields();
+
+/**********************************************/
+
+/*
+ * Add listener for form buttons
+ */
+
 addListenersToFormButtons();
+
