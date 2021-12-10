@@ -30,6 +30,7 @@ function addListenersForFormInputFields() {
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
         // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        setCookie(eventElementName, eventElementValue, null);
       });
     }
   }
@@ -39,8 +40,28 @@ addListenersForFormInputFields();
 /**********************************************/
 
 /*
- * Add listeners for form buttons
+ * Helper Functions
  */
+
+if (typeOf(setCookie) !== "function") { // this function might already be set in another javascript file
+  function setCookie(variableName, variableValue, expirationInDays) {
+    // console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
+    var domain = ".snapfinance.com";
+    var path = "/";
+    if (expirationInDays === null) {
+      expirationInDays = 365 * 2;
+    }
+    var expirationDate = new Date();
+    var expirationInMilliseconds = expirationInDays * 24 * 60 * 60 * 1000;
+    expirationDate.setTime(expirationDate.getTime() + expirationInMilliseconds);
+  
+    var cookieString = variableName + "=" + variableValue + "; expires=" + expirationDate.toGMTString() + "; path=" + path + "; domain=" + domain;
+    document.cookie = cookieString;
+  
+    var cookieStringLastUpdated = variableName + "LastUpdated=" + Date.now() + "; expires=" + expirationDate.toGMTString() + "; path=" + path + "; domain=" + domain;
+    document.cookie = cookieStringLastUpdated;
+  }
+}
 
 function addClassToElement(querySelector, className) {
   var element = document.querySelector(querySelector);
