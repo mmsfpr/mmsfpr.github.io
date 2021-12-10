@@ -108,6 +108,7 @@ function addListenersToFormButtons() {
 }
 
 function addListenersForFormInputFields() {
+  // TODO: FIGURE OUT HOW TO ADD CORRESPONDING COOKIE NAMES FOR EACH OF THESE
   var formInputFields = [
     {"name": "First Name"},
     {"id": "lastName"},
