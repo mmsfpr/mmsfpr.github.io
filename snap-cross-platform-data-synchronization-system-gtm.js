@@ -19,22 +19,35 @@ var checkCookiesForDiscrepanciesInterval = 10000; // milliseconds
  * Start Helper Functions
  */
 
-if (typeOf(readTextFile) !== "function") { // this function might already be set in another javascript file so we check it here
-  function readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            return rawFile.responseText;
-        }
+if (typeOf(readFileFromUrl) !== "function") { // this function might already be set in another javascript file so we check it here
+  function readFileFromUrl(url) {
+    // read text from URL location
+    var request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send(null);
+    request.onreadystatechange = function() {
+      // console.log("request.readyState: " + request.readyState);
+      // console.log("request.status: " + request.status);
+      if (
+        request.readyState === 4
+        && request.status === 200
+      ) {
+        // var type = request.getResponseHeader('Content-Type');
+        // if (type.indexOf("text") !== 1) {
+          return request.responseText;
+        // }
+      }
+      else {
+        // console.log("nope!");
+      }
     }
-    rawFile.send(null);
   }
 }
 //usage:
 // https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript
-// var fileText = readTextFile("https://mmsfpr.github.io/config.json");
+// var fileText = readFileFromUrl("https://mmsfpr.github.io/config.json");
+// var fileText = readFileFromUrl("https://raw.githubusercontent.com/mmsfpr/mmsfpr.github.io/main/config.json");
+// var fileJson = JSON.parse(fileText);
 
 function synchronizeCookieWithStorageSystems(variableName, variableValue, timestamp) {
   // console.log("Running function synchronizeCookieWithStorageSystems(" + variableName + ", " + variableValue + ", " + timestamp + ")");
@@ -177,7 +190,7 @@ window.setInterval(function() {
     "sessionId",
   ];
   var configUrl = "https://mmsfpr.github.io/config.json";
-  var configText = readTextFile(configUrl);
+  var configText = readFileFromUrl(configUrl);
   var config = JSON.parse(configText);
 
   
@@ -231,3 +244,32 @@ window.setInterval(function() {
  */
 
 checkQueryStringForDiscrepanciesAgainstStorageSystems();
+
+
+
+
+
+
+
+function readFileFromUrl(url) {
+  // read text from URL location
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.send(null);
+  return request.onreadystatechange = function() {
+    // console.log("request.readyState: " + request.readyState);
+    // console.log("request.status: " + request.status);
+    if (
+      request.readyState === 4
+      && request.status === 200
+    ) {
+      // var type = request.getResponseHeader('Content-Type');
+      // if (type.indexOf("text") !== 1) {
+       return request.responseText;
+      // }
+    }
+    else {
+      // console.log("nope!");
+    }
+  }
+}
