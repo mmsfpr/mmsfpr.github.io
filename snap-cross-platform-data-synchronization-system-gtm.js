@@ -180,6 +180,8 @@ window.setInterval(function() {
   var configText = readTextFile(configUrl);
   var config = JSON.parse(configText);
 
+  
+
   var lastUpdatedTimestamp = Date.now();
   for (var i = 0; i < variableNames.length; i++) {
     // console.log("Scanning for discrepancies for variable: " + variableNames[i]);
