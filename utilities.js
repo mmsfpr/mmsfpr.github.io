@@ -135,8 +135,8 @@ function addListenersToFormButtons() {
   // }
 }
 
-function addListenersForFormInputFields() {
-  console.log("Running function addListenersForFormInputFields()");
+function addListenersToFormInputFields() {
+  console.log("Running function addListenersToFormInputFields()");
   var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
   
   for (var i = 0; i < formInputFields.length; i++) {

@@ -4,7 +4,7 @@
  * Add listeners for form input fields
  */
 
-addListenersForFormInputFields();
+addListenersToFormInputFields();
 
 /**********************************************/
 
