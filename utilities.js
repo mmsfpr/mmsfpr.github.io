@@ -3,7 +3,7 @@
  */
 
 function setCookie(variableName, variableValue, expirationInDays) {
-  // console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
+  console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
   var domain = ".snapfinance.com";
   var path = "/";
   if (expirationInDays === null) {
@@ -168,24 +168,24 @@ function addListenersForFormInputFields() {
  */
 
 function synchronizeCookieWithStorageSystems(variableName, variableValue, timestamp) {
-  // console.log("Running function synchronizeCookieWithStorageSystems(" + variableName + ", " + variableValue + ", " + timestamp + ")");
+  console.log("Running function synchronizeCookieWithStorageSystems(" + variableName + ", " + variableValue + ", " + timestamp + ")");
   updateVariableInLocalStorage(variableName, variableValue, timestamp);
   updateVariableInGtmDataLayer(variableName, variableValue);
 }
 
 function updateVariableInLocalStorage(variableName, variableValue, timestamp) {
   if (typeof(Storage) !== "undefined") {
-    // console.log("Running function updateVariableInLocalStorage(" + variableName + ", " + variableValue + ", " + timestamp + ")");
+    console.log("Running function updateVariableInLocalStorage(" + variableName + ", " + variableValue + ", " + timestamp + ")");
     window.localStorage.setItem(variableName, variableValue);
     window.localStorage.setItem(variableName + "LastUpdated", timestamp);
   }
   else {
-    // console.log("localStorage not supported by this browser.");
+    console.log("localStorage not supported by this browser.");
   }
 }
 
 function updateVariableInGtmDataLayer(variableName, variableValue) {
-  // console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
+  console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     variableName: variableValue
@@ -193,7 +193,7 @@ function updateVariableInGtmDataLayer(variableName, variableValue) {
 }
 
 function getCookie(variableName) {
-  // console.log("Running function getCookie(" + variableName + ")");
+  console.log("Running function getCookie(" + variableName + ")");
   if (document.cookie.length > 0) {
     variableNameIndexStart = document.cookie.indexOf(variableName + "=");
     if (variableNameIndexStart != -1) {
@@ -209,7 +209,7 @@ function getCookie(variableName) {
 }
 
 function getQueryStringParameter(parameterName) {
-  // console.log("Running function getQueryStringParameter(" + parameterName + ")");
+  console.log("Running function getQueryStringParameter(" + parameterName + ")");
   parameterName = parameterName.replace(/[\[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + parameterName + "(=([^&#]*)|&|#|$)"), results = regex.exec(window.location.href);
   if (!results) { return null; }
@@ -218,7 +218,7 @@ function getQueryStringParameter(parameterName) {
 }
 
 function checkQueryStringForDiscrepanciesAgainstStorageSystems() {
-  // console.log("Running function checkQueryStringForDiscrepanciesAgainstStorageSystems()");
+  console.log("Running function checkQueryStringForDiscrepanciesAgainstStorageSystems()");
   var queryStringParameters = [
     "utm_source",
     "utm_medium",
