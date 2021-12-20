@@ -9,16 +9,16 @@
 window.setInterval(function() {
   // console.log("-------- START run for checkCookiesForDiscrepanciesAgainstStorageSystems() --------");
   var cookieNames = [];
-  for (var i = 0; i < mmCpdssConfig["formInputFields"].length; i++) {
-    cookieNames.push(mmCpdssConfig["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
   }
 
-  for (var i = 0; i < mmCpdssConfig["formButtons"].length; i++) {
-    cookieNames.push(mmCpdssConfig["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
   }
 
-  for (var i = 0; i < mmCpdssConfig["formDropDownMenus"].length; i++) {
-    cookieNames.push(mmCpdssConfig["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formDropDownMenus"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
   }
 
   var lastUpdatedTimestamp = Date.now();
