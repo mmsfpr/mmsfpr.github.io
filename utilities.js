@@ -65,7 +65,7 @@ function scanAllFormButtonsAndSetCookieValues() {
     var formButtonObject = formButtons[i];
     var cookieName = formButtonObject["cookieName"];
     var formButtonHasSelection = false;
-    var formButtonValueOptions = formButtonObject[i]["valueOptions"];
+    var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
       var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
       var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
