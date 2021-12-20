@@ -94,6 +94,7 @@ function addListenersToFormButtons() {
       var elementAttributeName = formButtonObject["attributeName"];
       var elementAttributeValue = formButtonObject["attributeValue"];
       var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
+      console.log("elementQuerySelector: " + elementQuerySelector);
       var formButtonField = document.querySelector(elementQuerySelector);
       if (formButtonField !== null) {
         console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
@@ -145,6 +146,7 @@ function addListenersToFormInputFields() {
     var elementAttributeValue = formElementObject["attributeValue"];
     var elementCookieName = formElementObject["cookieName"];
     var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
+    console.log("elementQuerySelector: " + elementQuerySelector);
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
       console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
