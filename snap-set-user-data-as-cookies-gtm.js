@@ -22,24 +22,6 @@ if (typeOf(setCookie) !== "function") { // this function might already be set in
   }
 }
 
-if (typeOf(readTextFile) !== "function") { // this function might already be set in another javascript file so we check it here
-  function readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            return rawFile.responseText;
-        }
-    }
-    rawFile.send(null);
-  }
-}
-//usage:
-// https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript
-// var fileText = readTextFile("https://mmsfpr.github.io/config.json");
-
-
 function addClassToElement(querySelector, className) {
   var element = document.querySelector(querySelector);
   if (element !== null) {
@@ -65,55 +47,48 @@ function removeClassFromElement(querySelector, className) {
 }
 
 function scanAllFormButtonsAndSetCookieValues() {
-  // TODO: replace this with reading config.json file
-  var formButtonsObject = {
-    "rentOrOwn": [
-      "rentbtn",
-      "ownbtn",
-    ],
-    "yearsAtThisAddress": [
-      "lessthanonebtn",
-      "onetothreebtn",
-      "threetofivebtn",
-      "fiveormorebtn",
-    ]
-  };
+  var formButtons = MM_CPDSS_CONFIG["formButtons"];
 
-  var formButtonsObjectKeys = Object.keys(formButtonsObject);
-  for (var i = 0; i < formButtonsObjectKeys.length; i++) {
-    var formButtonObjectKeyName = formButtonsObjectKeys[i];
-    var formButtonFieldIds = formButtonsObject[formButtonObjectKeyName];
+  for (var i = 0; i < formButtons.length; i++) {
+    var formButtonObject = formButtons[i];
+    var cookieName = formButtonObject["cookieName"];
     var formButtonHasSelection = false;
-    for (var ii = 0; ii < formButtonFieldIds.length; ii++) {
-      if (document.querySelector("#" + formButtonFieldIds[ii] + ".activeButtonListener.active") !== null) {
+    var formButtonValueOptions = formButtonObject[i]["valueOptions"];
+    for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
+      var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
+      var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
+      var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"'].activeButtonListener.active";
+      var formButtonFieldIsSelected = document.querySelector(elementQuerySelector);
+      if (formButtonFieldIsSelected !== null) {
         formButtonHasSelection = true;
-        console.log(formButtonObjectKeyName + ": " + formButtonFieldIds[ii]);
+        var cookieValue = formButtonValueOptions[ii]["cookieValue"];
+        console.log(cookieName + ": " + cookieValue);
       }
     }
     if (!formButtonHasSelection) {
-      console.log(formButtonObjectKeyName + ": (none)");
+      console.log(cookieName + ": (none)");
     }
   }
 }
 
 function addListenersToFormButtons() {
-  var configUrl = "https://mmsfpr.github.io/config.json";
-  var configText = readTextFile(configUrl);
-  var config = JSON.parse(configText);
-  var formButtons = config["formButtons"];
+  var formButtons = MM_CPDSS_CONFIG["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
     var formButtonObject = formButtons[i];
-    var elementAttributeName = formButtonObject["attributeName"];
-    var elementAttributeValue = formButtonObject["attributeValue"];
-    var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
-    var formButtonField = document.querySelector(elementQuerySelector);
-    if (formButtonField !== null) {
-      console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
-      addClassToElement(elementQuerySelector, "activeButtonListener");
-      formButtonField.addEventListener("focusout", function(event) {
-        scanAllFormButtonsAndSetCookieValues();
-      });
+    var formButtonValueOptions = formButtonObject["valueOptions"];
+    for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
+      var elementAttributeName = formButtonObject["attributeName"];
+      var elementAttributeValue = formButtonObject["attributeValue"];
+      var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
+      var formButtonField = document.querySelector(elementQuerySelector);
+      if (formButtonField !== null) {
+        console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+        addClassToElement(elementQuerySelector, "activeButtonListener");
+        formButtonField.addEventListener("focusout", function(event) {
+          scanAllFormButtonsAndSetCookieValues();
+        });
+      }
     }
   }
   // var formButtonsObject = {
@@ -149,35 +124,23 @@ function addListenersToFormButtons() {
 
 function addListenersForFormInputFields() {
   // TODO: FIGURE OUT HOW TO ADD CORRESPONDING COOKIE NAMES FOR EACH OF THESE
-  var formInputFields = [
-    {"name": "First Name"},
-    {"id": "lastName"},
-    {"name": "Mobile Phone Number"},
-    {"id": "emailAddress"},
-    {"id": "verificationCode"},
-    {"id": "homeAddress"},
-    {"name": "Zip Code"},
-    {"id": "apartment/suite"},
-    {"id": "dateOfBirth"},
-    {"id": "driverLicenseNumber"},
-    {"id": "state"},
-    {"id": "socialSecurityNumberOrItin"},
-  ];
+  var formInputFields = MM_CPDSS_CONFIG["formInputFields"];
   
   for (var i = 0; i < formInputFields.length; i++) {
     var formElementObject = formInputFields[i];
-    var elementAttributeName = Object.keys(formElementObject);
-    var elementAttributeValue = formElementObject[elementAttributeName];
+    var elementAttributeName = formElementObject["attributeName"];
+    var elementAttributeValue = formElementObject["attributeValue"];
+    var elementCookieName = formElementObject["cookieName"];
     var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
-      console.log("Adding listener for element matching querySelector(" + elementQuerySelector + ")");
+      console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
       formInputField.addEventListener("focusout", function(event) {
         var eventElementId = event.target.id;
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
         console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
-        setCookie(eventElementName, eventElementValue, null);
+        setCookie(elementCookieName, eventElementValue, null);
       });
     }
   }
