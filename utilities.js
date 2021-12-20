@@ -32,6 +32,7 @@ function setCookie(variableName, variableValue, expirationInDays) {
  */
 
 function addClassToElement(querySelector, className) {
+  console.log("Running function addClassToElement(" + querySelector + ", " + className + ")");
   var element = document.querySelector(querySelector);
   if (element !== null) {
     var elementClasses = element.className;
@@ -45,6 +46,7 @@ function addClassToElement(querySelector, className) {
 }
 
 function removeClassFromElement(querySelector, className) {
+  console.log("Running function removeClassFromElement(" + querySelector + ", " + className + ")");
   var element = document.querySelector(querySelector);
   if (element !== null) {
     var elementClasses = element.className;
@@ -56,6 +58,7 @@ function removeClassFromElement(querySelector, className) {
 }
 
 function scanAllFormButtonsAndSetCookieValues() {
+  console.log("Running function scanAllFormButtonsAndSetCookieValues()");
   var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
@@ -81,6 +84,7 @@ function scanAllFormButtonsAndSetCookieValues() {
 }
 
 function addListenersToFormButtons() {
+  console.log("Running function addListenersToFormButtons()");
   var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
@@ -132,7 +136,7 @@ function addListenersToFormButtons() {
 }
 
 function addListenersForFormInputFields() {
-  // TODO: FIGURE OUT HOW TO ADD CORRESPONDING COOKIE NAMES FOR EACH OF THESE
+  console.log("Running function addListenersForFormInputFields()");
   var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
   
   for (var i = 0; i < formInputFields.length; i++) {
