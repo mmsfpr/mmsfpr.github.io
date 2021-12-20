@@ -1,4 +1,6 @@
-var MM_CPDSS_CONFIG = { // stands for Mash Metrics Cross-Platform Data Synchronization System Config
+var MM_CPDSS_CONFIG_SYNC_INTERVAL = 10000; // milliseconds
+
+var MM_CPDSS_CONFIG_FORM_FIELDS = { // stands for Mash Metrics Cross-Platform Data Synchronization System Config
   "formButtons": [
     {
       "cookieName": "rentOrOwn",
