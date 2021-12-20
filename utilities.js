@@ -91,8 +91,8 @@ function addListenersToFormButtons() {
     var formButtonObject = formButtons[i];
     var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
-      var elementAttributeName = formButtonObject["attributeName"];
-      var elementAttributeValue = formButtonObject["attributeValue"];
+      var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
+      var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
       var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
       console.log("elementQuerySelector: " + elementQuerySelector);
       var formButtonField = document.querySelector(elementQuerySelector);
