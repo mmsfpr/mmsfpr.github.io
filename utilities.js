@@ -3,7 +3,7 @@
  */
 
 function setCookie(variableName, variableValue, expirationInDays) {
-  console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
+  // console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
   var domain = ".snapfinance.com";
   var path = "/";
   if (expirationInDays === null) {
@@ -32,7 +32,7 @@ function setCookie(variableName, variableValue, expirationInDays) {
  */
 
 function addClassToElement(querySelector, className) {
-  console.log("Running function addClassToElement(" + querySelector + ", " + className + ")");
+  // console.log("Running function addClassToElement(" + querySelector + ", " + className + ")");
   var element = document.querySelector(querySelector);
   if (element !== null) {
     var elementClasses = element.className;
@@ -46,7 +46,7 @@ function addClassToElement(querySelector, className) {
 }
 
 function removeClassFromElement(querySelector, className) {
-  console.log("Running function removeClassFromElement(" + querySelector + ", " + className + ")");
+  // console.log("Running function removeClassFromElement(" + querySelector + ", " + className + ")");
   var element = document.querySelector(querySelector);
   if (element !== null) {
     var elementClasses = element.className;
@@ -58,7 +58,7 @@ function removeClassFromElement(querySelector, className) {
 }
 
 function scanAllFormButtonsAndSetCookieValues() {
-  console.log("Running function scanAllFormButtonsAndSetCookieValues()");
+  // console.log("Running function scanAllFormButtonsAndSetCookieValues()");
   var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
@@ -74,17 +74,17 @@ function scanAllFormButtonsAndSetCookieValues() {
       if (formButtonFieldIsSelected !== null) {
         formButtonHasSelection = true;
         var cookieValue = formButtonValueOptions[ii]["cookieValue"];
-        console.log(cookieName + ": " + cookieValue);
+        // console.log(cookieName + ": " + cookieValue);
       }
     }
     if (!formButtonHasSelection) {
-      console.log(cookieName + ": (none)");
+      // console.log(cookieName + ": (none)");
     }
   }
 }
 
 function addListenersToFormButtons() {
-  console.log("Running function addListenersToFormButtons()");
+  // console.log("Running function addListenersToFormButtons()");
   var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
@@ -94,10 +94,10 @@ function addListenersToFormButtons() {
       var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
       var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
       var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
-      console.log("elementQuerySelector: " + elementQuerySelector);
+      // console.log("elementQuerySelector: " + elementQuerySelector);
       var formButtonField = document.querySelector(elementQuerySelector);
       if (formButtonField !== null) {
-        console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+        // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
         addClassToElement(elementQuerySelector, "activeButtonListener");
         formButtonField.addEventListener("focusout", function(event) {
           scanAllFormButtonsAndSetCookieValues();
@@ -137,7 +137,7 @@ function addListenersToFormButtons() {
 }
 
 function addListenersToFormInputFields() {
-  console.log("Running function addListenersToFormInputFields()");
+  // console.log("Running function addListenersToFormInputFields()");
   var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
   
   for (var i = 0; i < formInputFields.length; i++) {
@@ -146,15 +146,15 @@ function addListenersToFormInputFields() {
     var elementAttributeValue = formElementObject["attributeValue"];
     var elementCookieName = formElementObject["cookieName"];
     var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
-    console.log("elementQuerySelector: " + elementQuerySelector);
+    // console.log("elementQuerySelector: " + elementQuerySelector);
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
-      console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
       formInputField.addEventListener("focusout", function(event) {
         var eventElementId = event.target.id;
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
-        console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
         setCookie(elementCookieName, eventElementValue, null);
       });
     }
@@ -174,24 +174,24 @@ function addListenersToFormInputFields() {
  */
 
 function synchronizeCookieWithStorageSystems(variableName, variableValue, timestamp) {
-  console.log("Running function synchronizeCookieWithStorageSystems(" + variableName + ", " + variableValue + ", " + timestamp + ")");
+  // console.log("Running function synchronizeCookieWithStorageSystems(" + variableName + ", " + variableValue + ", " + timestamp + ")");
   updateVariableInLocalStorage(variableName, variableValue, timestamp);
   updateVariableInGtmDataLayer(variableName, variableValue);
 }
 
 function updateVariableInLocalStorage(variableName, variableValue, timestamp) {
   if (typeof(Storage) !== "undefined") {
-    console.log("Running function updateVariableInLocalStorage(" + variableName + ", " + variableValue + ", " + timestamp + ")");
+    // console.log("Running function updateVariableInLocalStorage(" + variableName + ", " + variableValue + ", " + timestamp + ")");
     window.localStorage.setItem(variableName, variableValue);
     window.localStorage.setItem(variableName + "LastUpdated", timestamp);
   }
   else {
-    console.log("localStorage not supported by this browser.");
+    // console.log("localStorage not supported by this browser.");
   }
 }
 
 function updateVariableInGtmDataLayer(variableName, variableValue) {
-  console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
+  // console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     variableName: variableValue
@@ -199,7 +199,7 @@ function updateVariableInGtmDataLayer(variableName, variableValue) {
 }
 
 function getCookie(variableName) {
-  console.log("Running function getCookie(" + variableName + ")");
+  // console.log("Running function getCookie(" + variableName + ")");
   if (document.cookie.length > 0) {
     variableNameIndexStart = document.cookie.indexOf(variableName + "=");
     if (variableNameIndexStart != -1) {
@@ -215,7 +215,7 @@ function getCookie(variableName) {
 }
 
 function getQueryStringParameter(parameterName) {
-  console.log("Running function getQueryStringParameter(" + parameterName + ")");
+  // console.log("Running function getQueryStringParameter(" + parameterName + ")");
   parameterName = parameterName.replace(/[\[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + parameterName + "(=([^&#]*)|&|#|$)"), results = regex.exec(window.location.href);
   if (!results) { return null; }
@@ -224,7 +224,7 @@ function getQueryStringParameter(parameterName) {
 }
 
 function checkQueryStringForDiscrepanciesAgainstStorageSystems() {
-  console.log("Running function checkQueryStringForDiscrepanciesAgainstStorageSystems()");
+  // console.log("Running function checkQueryStringForDiscrepanciesAgainstStorageSystems()");
   var queryStringParameters = [
     "utm_source",
     "utm_medium",
