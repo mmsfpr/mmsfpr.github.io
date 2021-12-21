@@ -152,8 +152,29 @@ function addListenersToFormInputFields() {
         var eventElementId = event.target.id;
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
-        console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
+        
+        for (var i = 0; i < formInputFields.length; i++) {
+          var formElementObject = formInputFields[i];
+          var elementAttributeName = formElementObject["attributeName"];
+          var elementAttributeValue = formElementObject["attributeValue"];
+          var elementCookieName = formElementObject["cookieName"];
+
+          if (
+            elementAttributeName == "id"
+            && eventElementId == elementAttributeValue
+          ) {
+            console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
         setCookie(elementCookieName, eventElementValue);
+          }
+          else if (
+            elementAttributeName == "name"
+            && eventElementName == elementAttributeValue
+          ) {
+            console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+            setCookie(elementCookieName, eventElementValue);
+          }
+        }
       });
     }
   }

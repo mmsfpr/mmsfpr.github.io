@@ -8,7 +8,7 @@
 
 window.setInterval(function() {
   
-  console.log("-------- START run for checkCookiesForDiscrepanciesAgainstStorageSystems() --------");
+  console.log("===-*-*-*-*-*-*-*-*-*-* START run for checkCookiesForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
   var cookieNames = [];
   for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"].length; i++) {
     cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
@@ -22,6 +22,7 @@ window.setInterval(function() {
     cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
   }
 
+  console.log("cookieNames: " + cookieNames);
   var lastUpdatedTimestamp = Date.now();
   for (var i = 0; i < cookieNames.length; i++) {
     console.log("Scanning for discrepancies for variable: " + cookieNames[i]);
@@ -63,7 +64,7 @@ window.setInterval(function() {
       }
     }
   }
-  console.log("-------- END run for checkCookiesForDiscrepanciesAgainstStorageSystems() --------");
+  console.log("===-*-*-*-*-*-*-*-*-*-* END run for checkCookiesForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
 }, MM_CPDSS_CONFIG_SYNC_INTERVAL);
 
 
