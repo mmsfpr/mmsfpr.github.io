@@ -24,6 +24,7 @@ window.setInterval(function() {
 
   // console.log("cookieNames: " + cookieNames);
   var lastUpdatedTimestamp = Date.now();
+  
   for (var i = 0; i < cookieNames.length; i++) {
     // console.log("Scanning for discrepancies for variable: " + cookieNames[i]);
     // var regexMatchCookieName = new RegExp('/^(.*;)?\s*'+ cookieNames[i] +'\s*=\s*[^;]+(.*)?$/');
@@ -31,6 +32,7 @@ window.setInterval(function() {
       // console.log("Cookie '"+ cookieNames[i] +"' does exist, but let's see if it matches what's in localStorage (because localStorage will match the GTM Data Layer and we want to make sure GTM Data Layer is up-to-date)");
       // Cookie does exist, but let's see if it matches what's in localStorage (because localStorage will match the GTM Data Layer and we want to make sure GTM Data Layer is up-to-date)
       if (typeof(Storage) !== "undefined") {
+        // SYNC COOKIE TO LOCAL STORAGE
         if (window.localStorage.getItem(cookieNames[i]) !== null) {
           if (window.localStorage.getItem(cookieNames[i]) !== getCookie(cookieNames[i])) {
             // console.log("Cookie '"+ cookieNames[i] +"' does not match with corresponding localStorage value, updating storage systems with Cookie value");
@@ -45,6 +47,24 @@ window.setInterval(function() {
           // console.log("We don't have a value in localStorage for '"+ cookieNames[i] +"', meaning it must be a new cookie. So let's synchronize it to localStorage and GTM Data Layer");
           // We don't have a value in localStorage for this cookie, meaning it must be a new cookie. So let's synchronize it to localStorage and GTM Data Layer
           synchronizeCookieWithStorageSystems(cookieNames[i], getCookie(cookieNames[i]), lastUpdatedTimestamp);
+        }
+        // SYNC LOCAL STORAGE TO DATALAYER
+        var gtmContainerId = MM_CPDSS_CONFIG_GTM_CONTAINER_ID_HOSTNAME_MAP[location.hostname];
+        var dataLayerValue = window.google_tag_manager[gtmContainerId].dataLayer.get(cookieNames[i]);
+        var localStorageValue = window.localStorage.getItem(cookieNames[i]);
+        if (typeof(dataLayerValue) !== "undefined") {
+          if (dataLayerValue !== localStorageValue) {
+            // console.log("Data Layer variable '"+ cookieNames[i] +"' does not match with corresponding localStorage value, updating storage systems with localStorage value");
+            synchronizeCookieWithStorageSystems(cookieNames[i], localStorageValue, lastUpdatedTimestamp);
+          }
+          else {
+            // console.log("Data Layer variable '"+ cookieNames[i] +"' matches with corresponding localStorage value. No need to update storage systems.");
+          }
+        }
+        else {
+          // console.log("We don't have a value in localStorage for '"+ cookieNames[i] +"', meaning it must be a new localStorage variable. So let's synchronize the dataLayer to localStorage");
+          // We don't have a value in localStorage for '"+ cookieNames[i] +"', meaning it must be a new localStorage variable. So let's synchronize the dataLayer to localStorage
+          synchronizeCookieWithStorageSystems(cookieNames[i], localStorageValue, lastUpdatedTimestamp);
         }
       }
     }
@@ -67,74 +87,6 @@ window.setInterval(function() {
   // console.log("===-*-*-*-*-*-*-*-*-*-* END run for checkCookiesForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
 }, MM_CPDSS_CONFIG_SYNC_INTERVAL);
 
-
-/*
- * Run dataLayer discrepancies checker at a pre-configured interval
- */
-
-window.setInterval(function() {
-  
-  // console.log("===-*-*-*-*-*-*-*-*-*-* START run for checkDataLayerForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
-  var cookieNames = [];
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
-  }
-
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
-  }
-
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formDropDownMenus"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
-  }
-
-  var gtmContainerId = MM_CPDSS_CONFIG_GTM_CONTAINER_ID_HOSTNAME_MAP[location.hostname];
-
-  // console.log("cookieNames: " + cookieNames);
-  var lastUpdatedTimestamp = Date.now();
-  for (var i = 0; i < cookieNames.length; i++) {
-    // console.log("Scanning for discrepancies for variable: " + cookieNames[i]);
-    // var regexMatchCookieName = new RegExp('/^(.*;)?\s*'+ cookieNames[i] +'\s*=\s*[^;]+(.*)?$/');
-    var dataLayerValue = window.google_tag_manager[gtmContainerId].dataLayer.get(cookieNames[i]);
-    if (typeof(dataLayerValue) !== "undefined") {
-      // console.log("DataLayer variable '"+ cookieNames[i] +"' does exist, but let's see if it matches what's in localStorage.
-      // DataLayer variable does exist, but let's see if it matches what's in localStorage (because localStorage will match the GTM Data Layer and we want to make sure GTM Data Layer is up-to-date)
-      if (typeof(Storage) !== "undefined") {
-        if (window.localStorage.getItem(cookieNames[i]) !== null) {
-          if (window.localStorage.getItem(cookieNames[i]) !== dataLayerValue) {
-            // console.log("DataLayer Variable '"+ cookieNames[i] +"' does not match with corresponding localStorage value, DataLayer with localStorage value");
-            // Cookie value does not match with corresponding localStorage value, updating storage systems with Cookie value
-            synchronizeCookieWithStorageSystems(cookieNames[i], getCookie(cookieNames[i]), lastUpdatedTimestamp);
-          }
-          else {
-            // console.log("Cookie '"+ cookieNames[i] +"' matches with corresponding localStorage value. No need to update storage systems.");
-          }
-        }
-        else {
-          // console.log("Interesting! we have something we care about in the dataLayer that isn't in localStorage! SUPER WEIRD! This shouldn't ever happen!We don't have a value in localStorage for '"+ cookieNames[i] +"', meaning it must be a new cookie. So let's synchronize it to localStorage and GTM Data Layer");
-          // We don't have a value in localStorage for this cookie, meaning it must be a new cookie. So let's synchronize it to localStorage and GTM Data Layer
-          // synchronizeCookieWithStorageSystems(cookieNames[i], getCookie(cookieNames[i]), lastUpdatedTimestamp);
-        }
-      }
-    }
-    else {
-      // console.log("Cookie '"+ cookieNames[i] +"' does not exist, see if we have it in localStorage.");
-      // Cookie does not exist, see if we have it in localStorage
-      if (typeof(Storage) !== "undefined") {
-        if (window.localStorage.getItem(cookieNames[i]) !== null) {
-          // console.log("Cookie '"+ cookieNames[i] +"' was deleted! Resetting it from localStorage now.");
-          // Cookie was deleted! Resetting it from localStorage now...
-          setCookie(cookieNames[i], window.localStorage.getItem(cookieNames[i]), window.localStorage.getItem(cookieNames[i] + "LastUpdated"));
-          // setCookie(cookieNames[i] + "LastUpdated", getCookie(cookieNames[i] + "LastUpdated"));
-        }
-        else {
-          // console.log("'"+ cookieNames[i] +"' does not exist in LocalStorage. Skipping this one.");
-        }
-      }
-    }
-  }
-  // console.log("===-*-*-*-*-*-*-*-*-*-* END run for checkDataLayerForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
-}, MM_CPDSS_CONFIG_SYNC_INTERVAL);
 
 
 /*
