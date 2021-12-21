@@ -4,11 +4,18 @@
 
 var MM_CPDSS_CONFIG_SYNC_INTERVAL = 10000; // milliseconds
 
-var MM_CPDSS_CONFIG_SYNC_COOKIE_DOMAIN = ".snapfinance.com";
+var MM_CPDSS_CONFIG_COOKIE_DOMAIN = ".snapfinance.com";
 
-var MM_CPDSS_CONFIG_SYNC_COOKIE_PATH = "/";
+var MM_CPDSS_CONFIG_COOKIE_PATH = "/";
 
-var MM_CPDSS_CONFIG_SYNC_COOKIE_EXPIRATION_IN_DAYS = 365 * 2; // 2 years
+var MM_CPDSS_CONFIG_COOKIE_EXPIRATION_IN_DAYS = 365 * 2; // 2 years
+
+var MM_CPDSS_CONFIG_GTM_CONTAINER_ID_HOSTNAME_MAP = {
+  "snapfinance.com": "GTM-52J6JQ5",
+  "learn.snapfinance.com": "GTM-52J6JQ5",
+  "blog.snapfinance.com": "GTM-52J6JQ5",
+  "apply.snapfinance.com": "GTM-T4KFL8S",
+};
 
 var MM_CPDSS_CONFIG_FORM_FIELDS = {
   "formButtons": [

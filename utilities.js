@@ -5,16 +5,16 @@
 function setCookie(variableName, variableValue, expirationInDays = null) {
   // console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
   if (expirationInDays === null) {
-    expirationInDays = MM_CPDSS_CONFIG_SYNC_COOKIE_EXPIRATION_IN_DAYS;
+    expirationInDays = MM_CPDSS_CONFIG_COOKIE_EXPIRATION_IN_DAYS;
   }
   var expirationDate = new Date();
   var expirationInMilliseconds = expirationInDays * 24 * 60 * 60 * 1000;
   expirationDate.setTime(expirationDate.getTime() + expirationInMilliseconds);
 
-  var cookieString = variableName + "=" + variableValue + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_SYNC_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_SYNC_COOKIE_DOMAIN;
+  var cookieString = variableName + "=" + variableValue + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_COOKIE_DOMAIN;
   document.cookie = cookieString;
 
-  var cookieStringLastUpdated = variableName + "LastUpdated=" + Date.now() + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_SYNC_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_SYNC_COOKIE_DOMAIN;
+  var cookieStringLastUpdated = variableName + "LastUpdated=" + Date.now() + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_COOKIE_DOMAIN;
   document.cookie = cookieStringLastUpdated;
 }
 
@@ -182,6 +182,7 @@ function updateVariableInLocalStorage(variableName, variableValue, timestamp) {
 
 function updateVariableInGtmDataLayer(variableName, variableValue) {
   // console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
+  // TODO: because on a page refresh the dataLayer resets, we want to compare it with local storage, and then re-establish those variables in the dataLayer
   window.dataLayer = window.dataLayer || [];
   var dataLayerObject = {};
   dataLayerObject[variableName] = variableValue;
