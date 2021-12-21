@@ -2,21 +2,19 @@
  * Start Helper Functions for all files
  */
 
-function setCookie(variableName, variableValue, expirationInDays) {
+function setCookie(variableName, variableValue, expirationInDays = null) {
   console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
-  var domain = ".snapfinance.com";
-  var path = "/";
   if (expirationInDays === null) {
-    expirationInDays = 365 * 2;
+    expirationInDays = MM_CPDSS_CONFIG_SYNC_COOKIE_EXPIRATION_IN_DAYS;
   }
   var expirationDate = new Date();
   var expirationInMilliseconds = expirationInDays * 24 * 60 * 60 * 1000;
   expirationDate.setTime(expirationDate.getTime() + expirationInMilliseconds);
 
-  var cookieString = variableName + "=" + variableValue + "; expires=" + expirationDate.toGMTString() + "; path=" + path + "; domain=" + domain;
+  var cookieString = variableName + "=" + variableValue + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_SYNC_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_SYNC_COOKIE_DOMAIN;
   document.cookie = cookieString;
 
-  var cookieStringLastUpdated = variableName + "LastUpdated=" + Date.now() + "; expires=" + expirationDate.toGMTString() + "; path=" + path + "; domain=" + domain;
+  var cookieStringLastUpdated = variableName + "LastUpdated=" + Date.now() + "; expires=" + expirationDate.toGMTString() + "; path=" + MM_CPDSS_CONFIG_SYNC_COOKIE_PATH + "; domain=" + MM_CPDSS_CONFIG_SYNC_COOKIE_DOMAIN;
   document.cookie = cookieStringLastUpdated;
 }
 
@@ -155,7 +153,7 @@ function addListenersToFormInputFields() {
         var eventElementName = event.target.name;
         var eventElementValue = event.target.value;
         console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
-        setCookie(elementCookieName, eventElementValue, null);
+        setCookie(elementCookieName, eventElementValue);
       });
     }
   }
