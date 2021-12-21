@@ -198,7 +198,8 @@ function getCookie(variableName) {
       if (variableNameIndexEnd == -1) {
         variableNameIndexEnd = document.cookie.length;
       }
-      return unescape(document.cookie.substring(variableNameIndexStart, variableNameIndexEnd));
+      // return unescape(document.cookie.substring(variableNameIndexStart, variableNameIndexEnd));
+      return document.cookie.substring(variableNameIndexStart, variableNameIndexEnd);
     }
   }
   return null;
