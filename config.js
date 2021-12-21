@@ -28,7 +28,7 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       ],
     },
     {
-      "cookieName": "directDeposit",
+      "cookieName": "yearsAtAddress",
       "valueOptions": [
         {
           "attributeName": "id",
