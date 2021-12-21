@@ -74,46 +74,11 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       "attributeName": "name",
       "attributeValue": "First Name",
     },
-    // {
-    //   "cookieName": "lastName",
-    //   "attributeName": "id",
-    //   "attributeValue": "lastName",
-    // },
-    // {
-    //   "cookieName": "mobileNumber",
-    //   "attributeName": "name",
-    //   "attributeValue": "Mobile Phone Number",
-    // },
-    // {
-    //   "cookieName": "email",
-    //   "attributeName": "id",
-    //   "attributeValue": "emailAddress",
-    // },
-    // {
-    //   "cookieName": "verificationCode",
-    //   "attributeName": "id",
-    //   "attributeValue": "verificationCode",
-    // },
-    // {
-    //   "cookieName": "homeAddress",
-    //   "attributeName": "id",
-    //   "attributeValue": "homeAddress",
-    // },
     {
       "cookieName": "zipCode",
       "attributeName": "name",
       "attributeValue": "Zip Code",
     },
-    // {
-    //   "cookieName": "apartmentOrSuite",
-    //   "attributeName": "id",
-    //   "attributeValue": "apartment/suite",
-    // },
-    // {
-    //   "cookieName": "driversLicenseNumber",
-    //   "attributeName": "id",
-    //   "attributeValue": "driverLicenseNumber",
-    // },
     {
       "cookieName": "state",
       "attributeName": "id",

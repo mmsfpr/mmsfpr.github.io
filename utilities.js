@@ -103,35 +103,6 @@ function addListenersToFormButtons() {
       }
     }
   }
-  // var formButtonsObject = {
-  //   "rentOrOwn": [
-  //     "rentbtn",
-  //     "ownbtn",
-  //   ],
-  //   "yearsAtThisAddress": [
-  //     "lessthanonebtn",
-  //     "onetothreebtn",
-  //     "threetofivebtn",
-  //     "fiveormorebtn",
-  //   ]
-  // };
-
-  // // formButtonsObject = config["formButtons"];
-
-  // var formButtonsObjectKeys = Object.keys(formButtonsObject);
-  // for (var i = 0; i < formButtonsObjectKeys.length; i++) {
-  //   var formButtonObjectKeyName = formButtonsObjectKeys[i];
-  //   var formButtonObjectKeyIds = formButtonsObject[formButtonObjectKeyName];
-  //   for (var ii = 0; ii < formButtonObjectKeyIds.length; ii++) {
-  //     var formButton = document.getElementById(formButtonObjectKeyIds[ii]);
-  //     if (formButton !== null) {
-  //       addClassToElement("#"+ formButtonObjectKeyIds[ii], "activeButtonListener");
-  //       formButton.addEventListener("focusout", function(event) {
-  //         scanAllFormButtonsAndSetCookieValues();
-  //       });
-  //     }
-  //   }
-  // }
 }
 
 function addListenersToFormInputFields() {
