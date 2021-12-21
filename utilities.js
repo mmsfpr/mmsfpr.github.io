@@ -212,9 +212,9 @@ function updateVariableInLocalStorage(variableName, variableValue, timestamp) {
 function updateVariableInGtmDataLayer(variableName, variableValue) {
   // console.log("Running function updateVariableInGtmDataLayer(" + variableName + ", " + variableValue + ")");
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    variableName: variableValue
-  });
+  var dataLayerObject = {};
+  dataLayerObject[variableName] = variableValue;
+  window.dataLayer.push(dataLayerObject);
 }
 
 function getCookie(variableName) {
