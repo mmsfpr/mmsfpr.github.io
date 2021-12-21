@@ -28,7 +28,7 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       ],
     },
     {
-      "cookieName": "yearsAtThisAddress",
+      "cookieName": "directDeposit",
       "valueOptions": [
         {
           "attributeName": "id",
@@ -51,7 +51,22 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
           "cookieValue": "5 or More Years"
         }
       ],
-    }
+    },
+    {
+      "cookieName": "directDeposit",
+      "valueOptions": [
+        {
+          "attributeName": "id",
+          "attributeValue": "directdepositnobtn",
+          "cookieValue": "No"
+        },
+        {
+          "attributeName": "id",
+          "attributeValue": "directdeposityesbtn",
+          "cookieValue": "Yes"
+        },
+      ],
+    },
   ],
   "formInputFields": [
     {
