@@ -88,4 +88,11 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
   "formDropDownMenus": [
 
   ],
+  "utmCodes": [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+  ]
 };

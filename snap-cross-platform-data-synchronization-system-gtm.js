@@ -10,16 +10,20 @@ window.setInterval(function() {
   
   // console.log("===-*-*-*-*-*-*-*-*-*-* START run for checkCookiesForDiscrepanciesAgainstStorageSystems() *-*-*-*-*-*-*-*-*-*-===");
   var cookieNames = [];
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"][i]["cookieName"]);
   }
 
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"][i]["cookieName"]);
   }
 
-  for (var i = 0; i < MM_CPDSS_CONFIG_FORM_FIELDS["formDropDownMenus"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"][i]["cookieName"]);
+  for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"][i]["cookieName"]);
+  }
+
+  for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["utmCodes"].length; i++) {
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["utmCodes"][i]);
   }
 
   // console.log("cookieNames: " + cookieNames);
