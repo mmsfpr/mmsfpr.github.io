@@ -71,10 +71,12 @@ function scanAllFormButtonsAndSetCookieValues() {
         formButtonHasSelection = true;
         var cookieValue = formButtonValueOptions[ii]["cookieValue"];
         // console.log(cookieName + ": " + cookieValue);
+        setCookie(cookieName, cookieValue);
       }
     }
     if (!formButtonHasSelection) {
       // console.log(cookieName + ": (none)");
+      setCookie(cookieName, "");
     }
   }
 }
