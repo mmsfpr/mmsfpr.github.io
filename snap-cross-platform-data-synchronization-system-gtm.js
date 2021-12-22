@@ -33,7 +33,10 @@ window.setInterval(function() {
     console.log("Scanning for discrepancies for variable: " + cookieNames[i]);
     // var regexMatchCookieName = new RegExp('/^(.*;)?\s*'+ cookieNames[i] +'\s*=\s*[^;]+(.*)?$/');
     // if (getCookie(cookieNames[i]) !== null) {
-    if (typeof(getCookie(cookieNames[i])) !== "undefined") {
+    if (
+      typeof(getCookie(cookieNames[i])) !== "undefined"
+      && getCookie(cookieNames[i]) !== null
+    ) {
       console.log("Cookie '"+ cookieNames[i] +"' does exist, but let's see if it matches what's in localStorage (because localStorage will match the GTM Data Layer and we want to make sure GTM Data Layer is up-to-date)");
       // Cookie does exist, but let's see if it matches what's in localStorage (because localStorage will match the GTM Data Layer and we want to make sure GTM Data Layer is up-to-date)
       if (typeof(Storage) !== "undefined") {
