@@ -56,6 +56,7 @@ function removeClassFromElement(querySelector, className) {
 }
 
 function scanAllFormButtonsAndSetCookieValues() {
+  console.log("------------------------------------------------------------");
   console.log("Running function scanAllFormButtonsAndSetCookieValues()");
   var formButtons = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"];
 
@@ -65,7 +66,7 @@ function scanAllFormButtonsAndSetCookieValues() {
     var formButtonHasSelection = false;
     var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
-      var elementQuerySelector = formButtonValueOptions[ii]["elementQuerySelector"] + ".active";
+      var elementQuerySelector = formButtonValueOptions[ii]["querySelector"] + ".active";
       var formButtonFieldIsSelected = document.querySelector(elementQuerySelector);
       if (formButtonFieldIsSelected !== null) {
         formButtonHasSelection = true;
@@ -79,6 +80,7 @@ function scanAllFormButtonsAndSetCookieValues() {
       setCookie(cookieName, "");
     }
   }
+  console.log("------------------------------------------------------------");
 }
 
 function addListenersToFormButtons() {
