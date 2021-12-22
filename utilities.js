@@ -57,7 +57,7 @@ function removeClassFromElement(querySelector, className) {
 
 function scanAllFormButtonsAndSetCookieValues() {
   // console.log("Running function scanAllFormButtonsAndSetCookieValues()");
-  var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
+  var formButtons = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
     var formButtonObject = formButtons[i];
@@ -81,7 +81,7 @@ function scanAllFormButtonsAndSetCookieValues() {
 
 function addListenersToFormButtons() {
   // console.log("Running function addListenersToFormButtons()");
-  var formButtons = MM_CPDSS_CONFIG_FORM_FIELDS["formButtons"];
+  var formButtons = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"];
 
   for (var i = 0; i < formButtons.length; i++) {
     var formButtonObject = formButtons[i];
@@ -103,7 +103,7 @@ function addListenersToFormButtons() {
 
 function addListenersToFormInputFields() {
   // console.log("Running function addListenersToFormInputFields()");
-  var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
+  var formInputFields = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"];
   
   for (var i = 0; i < formInputFields.length; i++) {
     var formElementObject = formInputFields[i];
