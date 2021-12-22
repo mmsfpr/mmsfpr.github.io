@@ -65,7 +65,7 @@ function scanAllFormButtonsAndSetCookieValues() {
     var formButtonHasSelection = false;
     var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
-      var elementQuerySelector = formButtonValueOptions[ii]["elementQuerySelector"];
+      var elementQuerySelector = formButtonValueOptions[ii]["elementQuerySelector"] + ".active";
       var formButtonFieldIsSelected = document.querySelector(elementQuerySelector);
       if (formButtonFieldIsSelected !== null) {
         formButtonHasSelection = true;
