@@ -116,13 +116,8 @@ function addListenersToFormInputFields() {
       formInputField.setAttribute("data-cookieName", elementCookieName);
       formInputField.addEventListener("focusout", function(event) {
         var eventElementValue = event.target.value;
-        var elementCookieName = event.target.attributes.getNamedItem("data-cookieName");
-        elementCookieName = elementCookieName
-          .replaceAll("data-cookiename", "")
-          .replaceAll("\"", "")
-          .replaceAll("=", "");
-
-        setCookie(elementCookieName, eventElementValue);
+        var eventElementCookieName = event.target.attributes.getNamedItem("data-cookieName").value;
+        setCookie(eventElementCookieName, eventElementValue);
       });
     }
   }
