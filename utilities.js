@@ -65,9 +65,7 @@ function scanAllFormButtonsAndSetCookieValues() {
     var formButtonHasSelection = false;
     var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
-      var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
-      var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
-      var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"'].activeButtonListener.active";
+      var elementQuerySelector = formButtonValueOptions[ii]["elementQuerySelector"];
       var formButtonFieldIsSelected = document.querySelector(elementQuerySelector);
       if (formButtonFieldIsSelected !== null) {
         formButtonHasSelection = true;
@@ -89,9 +87,7 @@ function addListenersToFormButtons() {
     var formButtonObject = formButtons[i];
     var formButtonValueOptions = formButtonObject["valueOptions"];
     for (var ii = 0; ii < formButtonValueOptions.length; ii++) {
-      var elementAttributeName = formButtonValueOptions[ii]["attributeName"];
-      var elementAttributeValue = formButtonValueOptions[ii]["attributeValue"];
-      var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
+      var elementQuerySelector = formButtonValueOptions[ii]["querySelector"];
       // console.log("elementQuerySelector: " + elementQuerySelector);
       var formButtonField = document.querySelector(elementQuerySelector);
       if (formButtonField !== null) {
@@ -111,41 +107,17 @@ function addListenersToFormInputFields() {
   
   for (var i = 0; i < formInputFields.length; i++) {
     var formElementObject = formInputFields[i];
-    var elementAttributeName = formElementObject["attributeName"];
-    var elementAttributeValue = formElementObject["attributeValue"];
+    var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
-    var elementQuerySelector = "[" + elementAttributeName + "='" + elementAttributeValue +"']";
     // console.log("elementQuerySelector: " + elementQuerySelector);
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
       // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      formInputField.setAttribute("data-cookieName", elementCookieName);
       formInputField.addEventListener("focusout", function(event) {
-        var eventElementId = event.target.id;
-        var eventElementName = event.target.name;
-        var eventElementValue = event.target.value;
-        var formInputFields = MM_CPDSS_CONFIG_FORM_FIELDS["formInputFields"];
-        
-        for (var i = 0; i < formInputFields.length; i++) {
-          var formElementObject = formInputFields[i];
-          var elementAttributeName = formElementObject["attributeName"];
-          var elementAttributeValue = formElementObject["attributeValue"];
-          var elementCookieName = formElementObject["cookieName"];
-
-          if (
-            elementAttributeName == "id"
-            && eventElementId == elementAttributeValue
-          ) {
-            // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
+        var eventElementValue = event.target.get("value");
+        var elementCookieName = event.target.get("data-cookieName");
         setCookie(elementCookieName, eventElementValue);
-          }
-          else if (
-            elementAttributeName == "name"
-            && eventElementName == elementAttributeValue
-          ) {
-            // console.log("eventElementId: " + eventElementId + " | eventElementName: " + eventElementName + " | eventElementValue: " + eventElementValue);
-            setCookie(elementCookieName, eventElementValue);
-          }
-        }
       });
     }
   }

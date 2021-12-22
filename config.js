@@ -23,13 +23,11 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       "cookieName": "rentOrOwn",
       "valueOptions": [
         {
-          "attributeName": "id",
-          "attributeValue": "rentbtn",
+          "querySelector": "[id='rentbtn']",
           "cookieValue": "Rent"
         },
         {
-          "attributeName": "id",
-          "attributeValue": "ownbtn",
+          "querySelector": "[id='ownbtn']",
           "cookieValue": "Own"
         }
       ],
@@ -38,23 +36,19 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       "cookieName": "yearsAtAddress",
       "valueOptions": [
         {
-          "attributeName": "id",
-          "attributeValue": "lessthanonebtn",
+          "querySelector": "[id='lessthanonebtn']",
           "cookieValue": "Less than 1 Year"
         },
         {
-          "attributeName": "id",
-          "attributeValue": "onetothreebtn",
+          "querySelector": "[id='onetothreebtn']",
           "cookieValue": "Between 1 - 3 Years"
         },
         {
-          "attributeName": "id",
-          "attributeValue": "threetofivebtn",
+          "querySelector": "[id='threetofivebtn']",
           "cookieValue": "Between 3 - 5 Years"
         },
         {
-          "attributeName": "id",
-          "attributeValue": "fiveormorebtn",
+          "querySelector": "[id='fiveormorebtn']",
           "cookieValue": "5 or More Years"
         }
       ],
@@ -63,13 +57,11 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
       "cookieName": "directDeposit",
       "valueOptions": [
         {
-          "attributeName": "id",
-          "attributeValue": "directdepositnobtn",
+          "querySelector": "[id='directdepositnobtn']",
           "cookieValue": "No"
         },
         {
-          "attributeName": "id",
-          "attributeValue": "directdeposityesbtn",
+          "querySelector": "[id='directdeposityesbtn']",
           "cookieValue": "Yes"
         },
       ],
@@ -78,23 +70,19 @@ var MM_CPDSS_CONFIG_FORM_FIELDS = {
   "formInputFields": [
     {
       "cookieName": "firstName",
-      "attributeName": "name",
-      "attributeValue": "First Name",
+      "querySelector": "[name='First Name']",
     },
     {
       "cookieName": "zipCode",
-      "attributeName": "name",
-      "attributeValue": "Zip Code",
+      "querySelector": "[name='Zip Code']",
     },
     {
       "cookieName": "state",
-      "attributeName": "id",
-      "attributeValue": "state",
+      "querySelector": "[id='state']",
     },
     {
       "cookieName": "dateOfBirth",
-      "attributeName": "id",
-      "attributeValue": "dateOfBirth",
+      "querySelector": "[id='dateOfBirth']",
     }
   ],
   "formDropDownMenus": [
