@@ -17,7 +17,7 @@ var MM_CPDSS_CONFIG_GTM_CONTAINER_ID_HOSTNAME_MAP = {
   "apply.snapfinance.com": "GTM-T4KFL8S",
 };
 
-var MM_CPDSS_CONFIG_FORM_FIELDS = {
+var MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES = {
   "formButtons": [
     {
       "cookieName": "rentOrOwn",
