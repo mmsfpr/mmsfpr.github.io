@@ -115,8 +115,8 @@ function addListenersToFormInputFields() {
       console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
       formInputField.setAttribute("data-cookieName", elementCookieName);
       formInputField.addEventListener("focusout", function(event) {
-        var eventElementValue = event.target.get("value");
-        var elementCookieName = event.target.get("data-cookieName");
+        var eventElementValue = event.target.attributes["value"];
+        var elementCookieName = event.target.attributes["data-cookieName"];
         setCookie(elementCookieName, eventElementValue);
       });
     }
