@@ -15,11 +15,11 @@ window.setInterval(function() {
   }
 
   for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"][i]["cookieName"]);
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formButtons"][i]["cookieName"]);
   }
 
   for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"].length; i++) {
-    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"][i]["cookieName"]);
+    cookieNames.push(MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"][i]["cookieName"]);
   }
 
   for (var i = 0; i < MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["utmCodes"].length; i++) {
