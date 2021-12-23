@@ -133,7 +133,7 @@ function addListenersToDropDownMenus() {
   
   for (var i = 0; i < formDropDownMenus.length; i++) {
     var formElementObject = formDropDownMenus[i];
-    var elementQuerySelector = formElementObject["querySelector"] + " span.mat-select-value-text span";
+    var elementQuerySelector = formElementObject["querySelector"] + " .mat-select-value span";
     var elementCookieName = formElementObject["cookieName"];
     console.log("elementQuerySelector: " + elementQuerySelector);
     var formDropDownMenu = document.querySelector(elementQuerySelector);
