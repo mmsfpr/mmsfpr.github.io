@@ -138,7 +138,7 @@ function addListenersToDropDownMenus() {
     // console.log("elementQuerySelector: " + elementQuerySelector);
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
-      console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
       formInputField.setAttribute("data-cookieName", elementCookieName);
       formInputField.addEventListener("DOMCharacterDataModified", function(event) {
         var eventElementValue = event.target.innerText;
