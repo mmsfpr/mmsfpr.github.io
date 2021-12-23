@@ -83,8 +83,8 @@ var MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES = {
   ],
   "formDropDownMenus": [
     {
-      "cookieName": "state",
-      "querySelector": "[id='state']", // value is document.querySelector("#state span.mat-select-value-text span").innerText;
+      "cookieName": "driversLicenseState",
+      "querySelector": "[id='state']",
     },
   ],
   "utmCodes": [
