@@ -136,11 +136,11 @@ function addListenersToDropDownMenus() {
     var elementQuerySelector = formElementObject["querySelector"] + " span.mat-select-value-text span";
     var elementCookieName = formElementObject["cookieName"];
     // console.log("elementQuerySelector: " + elementQuerySelector);
-    var formInputField = document.querySelector(elementQuerySelector);
-    if (formInputField !== null) {
+    var formDropDownMenu = document.querySelector(elementQuerySelector);
+    if (formDropDownMenu !== null) {
       // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
-      formInputField.setAttribute("data-cookieName", elementCookieName);
-      formInputField.addEventListener("DOMCharacterDataModified", function(event) {
+      formDropDownMenu.setAttribute("data-cookieName", elementCookieName);
+      formDropDownMenu.addEventListener("DOMCharacterDataModified", function(event) {
         var eventElementValue = event.target.innerText;
         var eventElementCookieName = event.target.attributes.getNamedItem("data-cookieName").value;
         setCookie(eventElementCookieName, eventElementValue);
