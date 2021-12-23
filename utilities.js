@@ -95,7 +95,7 @@ function addListenersToFormButtons() {
       // console.log("elementQuerySelector: " + elementQuerySelector);
       var formButtonField = document.querySelector(elementQuerySelector);
       if (formButtonField !== null) {
-        // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+        // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
         addClassToElement(elementQuerySelector, "activeButtonListener");
         formButtonField.addEventListener("focusout", function(event) {
           scanAllFormButtonsAndSetCookieValues();
@@ -116,7 +116,7 @@ function addListenersToFormInputFields() {
     // console.log("elementQuerySelector: " + elementQuerySelector);
     var formInputField = document.querySelector(elementQuerySelector);
     if (formInputField !== null) {
-      // console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
       formInputField.setAttribute("data-cookieName", elementCookieName);
       formInputField.addEventListener("focusout", function(event) {
         var eventElementValue = event.target.value;
@@ -138,7 +138,7 @@ function addListenersToDropDownMenus() {
     console.log("elementQuerySelector: " + elementQuerySelector);
     var formDropDownMenu = document.querySelector(elementQuerySelector);
     if (formDropDownMenu !== null) {
-      console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
       formDropDownMenu.setAttribute("data-cookieName", elementCookieName);
       formDropDownMenu.addEventListener("DOMCharacterDataModified", function(event) {
         var eventElementValue = event.target.innerText;
