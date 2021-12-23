@@ -17,8 +17,8 @@ addListenersToFormButtons();
 /**********************************************/
 
 /*
- * TODO: Add listener for form dropdown menus
+ * Add listener for form dropdown menus
  */
 
-// TODO: addListenersToDropdownMenus();
+addListenersToDropDownMenus();
 

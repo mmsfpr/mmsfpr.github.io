@@ -127,6 +127,27 @@ function addListenersToFormInputFields() {
   }
 }
 
+function addListenersToDropDownMenus() {
+  // console.log("Running function addListenersToDropdownMenus()");
+  var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"];
+  
+  for (var i = 0; i < formDropDownMenus.length; i++) {
+    var formElementObject = formDropDownMenus[i];
+    var elementQuerySelector = formElementObject["querySelector"] + " span.mat-select-value-text span";
+    var elementCookieName = formElementObject["cookieName"];
+    // console.log("elementQuerySelector: " + elementQuerySelector);
+    var formInputField = document.querySelector(elementQuerySelector);
+    if (formInputField !== null) {
+      console.log("Adding listener for element matching document.querySelector(" + elementQuerySelector + ")");
+      formInputField.setAttribute("data-cookieName", elementCookieName);
+      formInputField.addEventListener("DOMCharacterDataModified", function(event) {
+        var eventElementValue = event.target.innerText;
+        var eventElementCookieName = event.target.attributes.getNamedItem("data-cookieName").value;
+        setCookie(eventElementCookieName, eventElementValue);
+      });
+    }
+  }
+}
 
 /*
  * End Helper Functions for set-user-data-as-cookies-gtm.js

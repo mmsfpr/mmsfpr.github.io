@@ -77,16 +77,15 @@ var MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES = {
       "querySelector": "[name='Zip Code']",
     },
     {
-      "cookieName": "state",
-      "querySelector": "[id='state']",
-    },
-    {
       "cookieName": "dateOfBirth",
       "querySelector": "[id='dateOfBirth']",
     }
   ],
   "formDropDownMenus": [
-
+    {
+      "cookieName": "state",
+      "querySelector": "[id='state']", // value is document.querySelector("#state span.mat-select-value-text span").innerText;
+    },
   ],
   "utmCodes": [
     "utm_source",
