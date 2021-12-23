@@ -129,7 +129,7 @@ function addListenersToFormInputFields() {
 
 function addListenersToDropDownMenus() {
   // console.log("Running function addListenersToDropdownMenus()");
-  var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formInputFields"];
+  var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"];
   
   for (var i = 0; i < formDropDownMenus.length; i++) {
     var formElementObject = formDropDownMenus[i];
