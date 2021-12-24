@@ -139,12 +139,19 @@ function addListenersToDropDownMenus() {
     var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
     console.log("elementQuerySelector: " + elementQuerySelector);
-    var formDropDownMenu = document.querySelector(elementQuerySelector);
-    if (formDropDownMenu !== null) {
+    var formDropDownMenuParent = document.querySelector(elementQuerySelector);
+    if (formDropDownMenuParent !== null) {
       console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
-      formDropDownMenu.setAttribute("data-cookieName", elementCookieName);
+      formDropDownMenuParent.setAttribute("data-cookieName", elementCookieName);
       var observer = new MutationObserver(observerCallBack);
-      observer.observe(formDropDownMenu, observerOptions);
+      observer.observe(formDropDownMenuParent, observerOptions);
+    }
+    var formDropDownMenuChild = document.querySelector(elementQuerySelector + " div div span span");
+    if (formDropDownMenuChild !== null) {
+      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " div div span span\")");
+      formDropDownMenuChild.setAttribute("data-cookieName", elementCookieName);
+      var observer = new MutationObserver(observerCallBack);
+      observer.observe(formDropDownMenuChild, observerOptions);
     }
   }
 }
@@ -152,7 +159,7 @@ function addListenersToDropDownMenus() {
 function observerCallBack(mutations) {
   console.log("Running function observerCallBack(mutations)");
   for (var i=0; i < mutations.length; i++) {
-    console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText +"\");");
+    console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText.trim() +"\");");
   }
 }
 
