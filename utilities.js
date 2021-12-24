@@ -151,6 +151,7 @@ function addListenersToDropDownMenus() {
 }
 
 function observerCallBack(mutations) {
+  console.log("Running function observerCallBack(mutations)");
   for (var i=0; i < mutations.length; i++) {
     console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText +"\");");
   }
