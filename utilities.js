@@ -133,6 +133,7 @@ function addListenersToDropDownMenus() {
   var observerOptions = {
     "subtree": true,
     "childList": true,
+    "characterData": true,
   };
   for (var i = 0; i < formDropDownMenus.length; i++) {
     var formElementObject = formDropDownMenus[i];
