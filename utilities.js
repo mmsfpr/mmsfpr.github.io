@@ -130,24 +130,29 @@ function addListenersToFormInputFields() {
 function addListenersToDropDownMenus() {
   console.log("Running function addListenersToDropdownMenus()");
   var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"];
-  
+  var observerOptions = {
+    "subtree": true,
+    "childList": true,
+    "attributes": true,
+  };
   for (var i = 0; i < formDropDownMenus.length; i++) {
     var formElementObject = formDropDownMenus[i];
-    var elementQuerySelector = formElementObject["querySelector"] + " .mat-select-value span span";
+    var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
     console.log("elementQuerySelector: " + elementQuerySelector);
+    elementQuerySelector.addAttribute("data-cookieName", elementCookieName);
     var formDropDownMenu = document.querySelector(elementQuerySelector);
     if (formDropDownMenu !== null) {
       console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
-      formDropDownMenu.setAttribute("data-cookieName", elementCookieName);
-      formDropDownMenu.addEventListener("DOMCharacterDataModified", function(event) {
-        var eventElementValue = event.target.innerText;
-        var eventElementCookieName = event.target.attributes.getNamedItem("data-cookieName").value;
-        console.log("eventElementValue: " + eventElementValue);
-        console.log("eventElementCookieName: " + eventElementCookieName);
-        setCookie(eventElementCookieName, eventElementValue);
-      });
+      var observer = new MutationObserver(observerCallBack);
+      observer.observe(formDropDownMenu, observerOptions);
     }
+  }
+}
+
+function observerCallBack(mutations) {
+  for (var i=0; i < mutations.length; i++) {
+    console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText +"\");");
   }
 }
 
