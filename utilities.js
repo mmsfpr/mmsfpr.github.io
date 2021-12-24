@@ -139,10 +139,10 @@ function addListenersToDropDownMenus() {
     var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
     console.log("elementQuerySelector: " + elementQuerySelector);
-    elementQuerySelector.addAttribute("data-cookieName", elementCookieName);
     var formDropDownMenu = document.querySelector(elementQuerySelector);
     if (formDropDownMenu !== null) {
       console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
+      formDropDownMenu.addAttribute("data-cookieName", elementCookieName);
       var observer = new MutationObserver(observerCallBack);
       observer.observe(formDropDownMenu, observerOptions);
     }
