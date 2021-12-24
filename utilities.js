@@ -3,7 +3,7 @@
  */
 
 function setCookie(variableName, variableValue, expirationInDays = null) {
-  console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
+  // console.log("Running function setCookie(" + variableName + ", " + variableValue + ", " + expirationInDays + ")");
   if (expirationInDays === null) {
     expirationInDays = MM_CPDSS_CONFIG_COOKIE_EXPIRATION_IN_DAYS;
   }
@@ -128,7 +128,7 @@ function addListenersToFormInputFields() {
 }
 
 function addListenersToDropDownMenus() {
-  console.log("Running function addListenersToDropdownMenus()");
+  // console.log("Running function addListenersToDropdownMenus()");
   var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"];
   var observerOptions = {
     "subtree": true,
@@ -139,17 +139,17 @@ function addListenersToDropDownMenus() {
     var formElementObject = formDropDownMenus[i];
     var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
-    console.log("elementQuerySelector: " + elementQuerySelector);
+    // console.log("elementQuerySelector: " + elementQuerySelector);
     var formDropDownMenuParent = document.querySelector(elementQuerySelector);
     if (formDropDownMenuParent !== null) {
-      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
+      // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
       formDropDownMenuParent.setAttribute("data-cookieName", elementCookieName);
       var observer = new MutationObserver(observerCallBack);
       observer.observe(formDropDownMenuParent, observerOptions);
     }
     var formDropDownMenuChild = document.querySelector(elementQuerySelector + " span");
     if (formDropDownMenuChild !== null) {
-      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " span\")");
+      // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " span\")");
       formDropDownMenuChild.setAttribute("data-cookieName", elementCookieName);
       var observer = new MutationObserver(observerCallBack);
       observer.observe(formDropDownMenuChild, observerOptions);
@@ -158,9 +158,14 @@ function addListenersToDropDownMenus() {
 }
 
 function observerCallBack(mutations) {
-  console.log("Running function observerCallBack(mutations)");
+  // console.log("Running function observerCallBack(mutations)");
   for (var i=0; i < mutations.length; i++) {
-    console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText.trim() +"\");");
+    if (mutations[i].target !== null) {
+      // console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText.trim() +"\");");
+    }
+    else {
+      // console.log("null target element");
+    }
   }
 }
 
