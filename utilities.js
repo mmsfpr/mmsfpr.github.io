@@ -147,9 +147,9 @@ function addListenersToDropDownMenus() {
       var observer = new MutationObserver(observerCallBack);
       observer.observe(formDropDownMenuParent, observerOptions);
     }
-    var formDropDownMenuChild = document.querySelector(elementQuerySelector + " div div span span");
+    var formDropDownMenuChild = document.querySelector(elementQuerySelector + " span");
     if (formDropDownMenuChild !== null) {
-      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " div div span span\")");
+      console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " span\")");
       formDropDownMenuChild.setAttribute("data-cookieName", elementCookieName);
       var observer = new MutationObserver(observerCallBack);
       observer.observe(formDropDownMenuChild, observerOptions);
