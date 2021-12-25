@@ -148,17 +148,6 @@ function addListenersToDropDownMenus() {
   }
 }
 
-function observerCallBack(mutations) {
-  // console.log("Running function observerCallBack(mutations)");
-  for (var i=0; i < mutations.length; i++) {
-    if (mutations[i].target !== null) {
-      // console.log("setCookie(\"driversLicenseState\", \"" + mutations[i].target.innerText.trim() +"\");");
-    }
-    else {
-      // console.log("null target element");
-    }
-  }
-}
 
 /*
  * End Helper Functions for set-user-data-as-cookies-gtm.js
