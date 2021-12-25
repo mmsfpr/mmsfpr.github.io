@@ -142,7 +142,8 @@ function addListenersToDropDownMenus() {
       formDropDownMenuElement.setAttribute("data-cookieName", elementCookieName);
       formDropDownMenuElement.addEventListener("focusout", function(event) {
         var cookieName = event.target.attributes.getNamedItem("data-cookieName").value;
-        setCookie(cookieName, event.target.innerText);
+        var cookieValue = event.target.innerText;
+        setCookie(cookieName, cookieValue);
       });
     }
   }
