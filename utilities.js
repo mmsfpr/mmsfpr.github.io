@@ -130,29 +130,20 @@ function addListenersToFormInputFields() {
 function addListenersToDropDownMenus() {
   // console.log("Running function addListenersToDropdownMenus()");
   var formDropDownMenus = MM_CPDSS_CONFIG_DATA_LAYER_VARIABLES["formDropDownMenus"];
-  var observerOptions = {
-    "subtree": true,
-    "childList": true,
-    "characterData": true,
-  };
+  
   for (var i = 0; i < formDropDownMenus.length; i++) {
     var formElementObject = formDropDownMenus[i];
     var elementQuerySelector = formElementObject["querySelector"];
     var elementCookieName = formElementObject["cookieName"];
     // console.log("elementQuerySelector: " + elementQuerySelector);
-    var formDropDownMenuParent = document.querySelector(elementQuerySelector);
-    if (formDropDownMenuParent !== null) {
+    var formDropDownMenuElement = document.querySelector(elementQuerySelector);
+    if (formDropDownMenuElement !== null) {
       // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + "\")");
-      formDropDownMenuParent.setAttribute("data-cookieName", elementCookieName);
-      var observer = new MutationObserver(observerCallBack);
-      observer.observe(formDropDownMenuParent, observerOptions);
-    }
-    var formDropDownMenuChild = document.querySelector(elementQuerySelector + " span");
-    if (formDropDownMenuChild !== null) {
-      // console.log("Adding listener for element matching document.querySelector(\"" + elementQuerySelector + " span\")");
-      formDropDownMenuChild.setAttribute("data-cookieName", elementCookieName);
-      var observer = new MutationObserver(observerCallBack);
-      observer.observe(formDropDownMenuChild, observerOptions);
+      formDropDownMenuElement.setAttribute("data-cookieName", elementCookieName);
+      formDropDownMenuElement.addEventListener("focusout", function(event) {
+        var cookieName = event.target.attributes.getNamedItem("data-cookieName").value;
+        setCookie(cookieName, event.target.innerText);
+      });
     }
   }
 }
